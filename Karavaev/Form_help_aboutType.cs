@@ -17,9 +17,6 @@ namespace Karavaev
             InitializeComponent();
         }
 
-        private void Button_aboutType_close_Click(object sender, EventArgs e)
-        {
-            Router.GetInstance().GoBack();
-        }
+        private void Button_aboutType_close_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
     }
 }

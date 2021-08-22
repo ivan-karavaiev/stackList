@@ -22,9 +22,6 @@ namespace Karavaev
             Application.Exit();
         }
 
-        private void Button_main_name_Click(object sender, EventArgs e)
-        {
-            Router.GetInstance().NavigateTo(new Form_menu());
-        }
+        private void Button_main_name_Click(object sender, EventArgs e) => Router.GetInstance().NavigateTo(new Form_menu());
     }
 }

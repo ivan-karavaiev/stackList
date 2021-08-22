@@ -198,9 +198,6 @@ namespace Karavaev
             }
         }
 
-        private void Button_build_back_Click(object sender, EventArgs e)
-        {
-            Router.GetInstance().GoBack();
-        }
+        private void Button_build_back_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
     }
 }

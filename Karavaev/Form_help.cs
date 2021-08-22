@@ -17,9 +17,6 @@ namespace Karavaev
             InitializeComponent();
         }
 
-        private void Button_practic_back_Click(object sender, EventArgs e)
-        {
-            Router.GetInstance().GoBack();
-        }
+        private void Button_practic_back_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
     }
 }
