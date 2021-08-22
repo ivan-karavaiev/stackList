@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E57A5558-D5B0-4255-8215-153ADA36273F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Karavaev</RootNamespace>
+    <AssemblyName>Karavaev</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form_buildTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_buildTree.Designer.cs">
+      <DependentUpon>Form_buildTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_help.Designer.cs">
+      <DependentUpon>Form_help.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_help_aboutType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_help_aboutType.Designer.cs">
+      <DependentUpon>Form_help_aboutType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_main.Designer.cs">
+      <DependentUpon>Form_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_menu.Designer.cs">
+      <DependentUpon>Form_menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_practic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_practic.Designer.cs">
+      <DependentUpon>Form_practic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_practic_model.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_practic_model.Designer.cs">
+      <DependentUpon>Form_practic_model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_practic_rebuilding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_practic_rebuilding.Designer.cs">
+      <DependentUpon>Form_practic_rebuilding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_tests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_tests.Designer.cs">
+      <DependentUpon>Form_tests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_text_download.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_text_download.Designer.cs">
+      <DependentUpon>Form_text_download.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_text_save.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_text_save.Designer.cs">
+      <DependentUpon>Form_text_save.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_text_save_full.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_text_save_full.Designer.cs">
+      <DependentUpon>Form_text_save_full.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stack_list.cs" />
+    <Compile Include="MyRandom.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stack_tree.cs" />
+    <Compile Include="StartBuild.cs" />
+    <Compile Include="ViewData.cs" />
+    <EmbeddedResource Include="Form_buildTree.resx">
+      <DependentUpon>Form_buildTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_help.resx">
+      <DependentUpon>Form_help.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_help_aboutType.resx">
+      <DependentUpon>Form_help_aboutType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_main.resx">
+      <DependentUpon>Form_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_menu.resx">
+      <DependentUpon>Form_menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_practic.resx">
+      <DependentUpon>Form_practic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_practic_model.resx">
+      <DependentUpon>Form_practic_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_practic_rebuilding.resx">
+      <DependentUpon>Form_practic_rebuilding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_tests.resx">
+      <DependentUpon>Form_tests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_text_download.resx">
+      <DependentUpon>Form_text_download.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_text_save.resx">
+      <DependentUpon>Form_text_save.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_text_save_full.resx">
+      <DependentUpon>Form_text_save_full.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graph_Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutType%281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutType%282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutType%283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutType%284%29.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
