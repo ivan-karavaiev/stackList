@@ -16,6 +16,7 @@ namespace Karavaev
         List<Point> vertex = new List<Point>();
         List<Point> edge = new List<Point>();
         List<List<int>> stackList = new List<List<int>>();
+
         public Form_save_to_text(List<Point> vertex, List<Point> edge, List<List<int>> stackList)
         {
             InitializeComponent();
@@ -25,36 +26,42 @@ namespace Karavaev
         }
 
         int button_type = 0;
+
         private void Button_typeA_Click(object sender, EventArgs e)
         {
             button_type = 1;
         }
+
         private void Button_typeB_Click(object sender, EventArgs e)
         {
             button_type = 2;
         }
+
         private void Button_typeC_Click(object sender, EventArgs e)
         {
             button_type = 3;
         }
+
         string file_name = "";
         string filePath = @"..\..\..\TextFile\Type";
+
         void saveTypeA()
         {
             filePath = filePath + @"A\" + file_name + ".txt";
             try
             {
-                using(StreamWriter sw = new StreamWriter(filePath))
+                using (StreamWriter sw = new StreamWriter(filePath))
                 {
                     int n = vertex.Count();
                     int m = edge.Count();
                     sw.WriteLine(n);
-                    for(int i = 0; i < n; ++i)
+                    for (int i = 0; i < n; ++i)
                     {
                         sw.Write(vertex[i].X);
                         sw.Write(' ');
                         sw.WriteLine(vertex[i].Y);
                     }
+
                     sw.WriteLine(m);
                     for (int i = 0; i < m; ++i)
                     {
@@ -64,11 +71,12 @@ namespace Karavaev
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
         }
+
         void saveTypeB()
         {
             filePath = filePath + @"B\" + file_name + ".txt";
@@ -93,6 +101,7 @@ namespace Karavaev
                 MessageBox.Show(e.Message);
             }
         }
+
         void saveTypeC()
         {
             filePath = filePath + @"C\" + file_name + ".txt";
@@ -111,12 +120,13 @@ namespace Karavaev
                             list_of_stack[list_of_stack.Count() - 1].Add(stackList[i][j]);
                         }
                     }
+
                     int n = list_of_stack.Count();
                     sw.WriteLine(n);
                     for (int i = 0; i < n; ++i)
                     {
                         int m = list_of_stack[i].Count();
-                        for(int j = 0; j < m; ++j)
+                        for (int j = 0; j < m; ++j)
                         {
                             sw.Write(list_of_stack[i][j]);
                             sw.Write(' ');
@@ -129,6 +139,7 @@ namespace Karavaev
                 MessageBox.Show(e.Message);
             }
         }
+
         private void Button_save_Click(object sender, EventArgs e)
         {
             file_name = textBox_fileName.Text;
@@ -136,13 +147,10 @@ namespace Karavaev
             if (button_type == 1) saveTypeA();
             if (button_type == 2) saveTypeB();
             if (button_type == 3) saveTypeC();
-            this.Close();
+            Router.GetInstance().GoBack();
         }
 
-        private void Button_aboutType_Click(object sender, EventArgs e)
-        {
-            Form_help_aboutType newForm = new Form_help_aboutType();
-            newForm.Show();
-        }
+        private void Button_aboutType_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_help_aboutType());
     }
 }

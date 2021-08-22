@@ -19,7 +19,7 @@ namespace Karavaev
 
         private void Button_aboutType_close_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Router.GetInstance().GoBack();
         }
     }
 }

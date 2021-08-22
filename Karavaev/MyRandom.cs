@@ -11,6 +11,7 @@ namespace Karavaev
     class MyRandom
     {
         private static RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+
         public int Next(int a, int b)
         {
             byte[] randomNumber = new byte[1];
@@ -18,10 +19,11 @@ namespace Karavaev
             rng.Dispose();
             int x = (b - a + 1);
             int ans = a + (randomNumber[0] % x);
-            if(x > 256 && ans % 2 == 1 && ans + 255 <= b)
+            if (x > 256 && ans % 2 == 1 && ans + 255 <= b)
             {
                 ans += 255;
             }
+
             return ans;
         }
     }

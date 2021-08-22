@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Router.cs" />
     <Compile Include="Form_buildTree.cs">
       <SubType>Form</SubType>
     </Compile>

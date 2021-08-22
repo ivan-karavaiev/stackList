@@ -41,7 +41,7 @@ namespace Karavaev
         {
             //MessageBox.Show(num.ToString());
             MessageBox.Show("Завантажені дані не відповідають типу обраного файлу.");
-            this.Close();
+            Router.GetInstance().GoBack();
         }
         void Download()
         {
@@ -181,13 +181,10 @@ namespace Karavaev
             if (button_type == 0 || file_name == "") return;
             if (button_type == 1) downloadTypeA();
             if (button_type == 2) downloadTypeB();
-            this.Close();
+            Router.GetInstance().GoBack();
         }
 
-        private void Button_aboutType_Click(object sender, EventArgs e)
-        {
-            Form_help_aboutType newForm = new Form_help_aboutType();
-            newForm.Show();
-        }
+        private void Button_aboutType_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_help_aboutType());
     }
 }

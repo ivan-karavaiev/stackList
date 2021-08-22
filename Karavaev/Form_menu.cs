@@ -17,11 +17,8 @@ namespace Karavaev
             InitializeComponent();
         }
 
-        private void Button_menu_test_Click(object sender, EventArgs e)
-        {
-            Form_tests newForm = new Form_tests();
-            newForm.Show();
-        }
+        private void Button_menu_test_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_tests());
 
         private void Button_menu_theory_Click(object sender, EventArgs e)
         {
@@ -29,24 +26,16 @@ namespace Karavaev
             Fileopen.StartInfo.FileName = @"..\..\..\Documentation.docx";
             Fileopen.StartInfo.Verb = "Open";
             Fileopen.StartInfo.CreateNoWindow = false;
+            // FIXME: try catch
             Fileopen.Start();
         }
 
-        private void Button_menu_practic_Click(object sender, EventArgs e)
-        {
-            Form_practic newForm = new Form_practic();
-            newForm.Show();
-        }
+        private void Button_menu_practic_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_practic());
 
-        private void Button_menu_build_Click(object sender, EventArgs e)
-        {
-            Form_buildTree newForm = new Form_buildTree();
-            newForm.Show();
-        }
+        private void Button_menu_build_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_buildTree());
 
-        private void Button_menu_back_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void Button_menu_back_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
     }
 }

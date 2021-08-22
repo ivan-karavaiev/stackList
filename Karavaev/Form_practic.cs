@@ -18,16 +18,10 @@ namespace Karavaev
         }
 
         // Button
-        private void Button_practic_back_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void Button_practic_back_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
 
-        private void Button_practic_model_Click(object sender, EventArgs e)
-        {
-            Form_practic_model newForm = new Form_practic_model();
-            newForm.Show();
-        }
+        private void Button_practic_model_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_practic_model());
 
         // Початок побудови
         Bitmap bmp;
@@ -56,12 +50,15 @@ namespace Karavaev
             {
                 gr = build.DrawRound(gr, penBlack, vertex[i], i);
             }
+
             for (int i = 0; i < edge.Count(); ++i)
             {
                 gr = build.DrawEdge(gr, penBlack, vertex[edge[i].X], vertex[edge[i].Y]);
             }
+
             pictureBox_GraphView.Image = bmp;
         }
+
         void initializationVertex(int n)
         {
             Point[] coordinates = new Point[n];
@@ -79,9 +76,11 @@ namespace Karavaev
                         Intersection |= build.squareIntersection(coordinates[i], coordinates[j]);
                     }
                 }
+
                 vertex.Add(coordinates[i]);
             }
         }
+
         private void Button_practic_random_Click(object sender, EventArgs e)
         {
             int n = build.Next(1, mxN);
@@ -103,46 +102,54 @@ namespace Karavaev
                         break;
                     }
                 }
+
                 Point way = edge[i];
             }
+
             ViewGraph();
         }
 
         // DSU 
         int[] p = new int[mxN];
         int[] sz = new int[mxN];
+
         void build_set()
         {
-            for(int i = 0; i < mxN; ++i)
+            for (int i = 0; i < mxN; ++i)
             {
                 p[i] = i;
-                sz[i] = 1; 
+                sz[i] = 1;
             }
         }
+
         int find_set(int v)
         {
             if (p[v] == v) return v;
             return p[v] = find_set(p[v]);
         }
+
         bool union_sets(int x, int y)
         {
             x = find_set(x);
             y = find_set(y);
             if (x != y)
             {
-                if(sz[x] < sz[y])
+                if (sz[x] < sz[y])
                 {
                     int swap = sz[y];
                     sz[y] = sz[x];
                     sz[x] = swap;
                 }
+
                 p[y] = x;
                 sz[x] += sz[y];
                 sz[y] = 0;
                 return true;
             }
+
             return false;
         }
+
         //
         private void Button_practic_random_tree_Click(object sender, EventArgs e)
         {
@@ -153,7 +160,7 @@ namespace Karavaev
             edge.Clear();
             int m = n - 1;
             build_set();
-            for(int i = 0; i < m; ++i)
+            for (int i = 0; i < m; ++i)
             {
                 while (true)
                 {
@@ -169,6 +176,7 @@ namespace Karavaev
 
             ViewGraph();
         }
+
         private void Button_practic_random_acyclic_Click(object sender, EventArgs e)
         {
             vertex.Clear();
@@ -194,22 +202,19 @@ namespace Karavaev
 
             ViewGraph();
         }
-        private void Button_practic_modellling_Click(object sender, EventArgs e)
-        {
-            Form_practic_model newForm = new Form_practic_model(vertex, edge);
-            //newForm.Owner = this;
-            newForm.Show();
-        }
+
+        private void Button_practic_modellling_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_practic_model(vertex, edge));
+
         private void Button_practic_model_text_download_Click(object sender, EventArgs e)
         {
-            Form_text_download newForm = new Form_text_download(radius, 0);
-            newForm.Show();
+            var newForm = new Form_text_download(radius, 0);
             newForm.Owner = this;
+            
+            Router.GetInstance().NavigateTo(newForm);
         }
-        private void Button_practic_model_text_save_Click(object sender, EventArgs e)
-        {
-            Form_text_save newForm = new Form_text_save(vertex, edge);
-            newForm.Show();
-        }
+
+        private void Button_practic_model_text_save_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_text_save(vertex, edge));
     }
 }

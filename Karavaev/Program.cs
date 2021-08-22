@@ -16,7 +16,9 @@ namespace Karavaev
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_main());
+
+            Router.GetInstance().NavigateTo(new Form_main());
+            Application.Run();
         }
     }
 }

@@ -15,23 +15,29 @@ namespace Karavaev
     {
         List<Point> vertex = new List<Point>();
         List<Point> edge = new List<Point>();
+
         public Form_text_save(List<Point> vertex, List<Point> edge)
         {
             InitializeComponent();
             this.vertex = vertex;
             this.edge = edge;
         }
+
         int button_type = 0;
+
         private void Button_typeA_Click(object sender, EventArgs e)
         {
             button_type = 1;
         }
+
         private void Button_typeB_Click(object sender, EventArgs e)
         {
             button_type = 2;
         }
+
         string file_name = "";
         string filePath = @"..\..\..\TextFile\Type";
+
         void saveTypeA()
         {
             filePath = filePath + @"A\" + file_name + ".txt";
@@ -48,6 +54,7 @@ namespace Karavaev
                         sw.Write(' ');
                         sw.WriteLine(vertex[i].Y);
                     }
+
                     sw.WriteLine(m);
                     for (int i = 0; i < m; ++i)
                     {
@@ -62,6 +69,7 @@ namespace Karavaev
                 MessageBox.Show(e.Message);
             }
         }
+
         void saveTypeB()
         {
             filePath = filePath + @"B\" + file_name + ".txt";
@@ -93,13 +101,10 @@ namespace Karavaev
             if (button_type == 0 || file_name == "") return;
             if (button_type == 1) saveTypeA();
             if (button_type == 2) saveTypeB();
-            this.Close();
+            Router.GetInstance().GoBack();
         }
 
-        private void Button_aboutType_Click(object sender, EventArgs e)
-        {
-            Form_help_aboutType newForm = new Form_help_aboutType();
-            newForm.Show();
-        }
+        private void Button_aboutType_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_help_aboutType());
     }
 }

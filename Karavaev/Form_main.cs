@@ -24,8 +24,7 @@ namespace Karavaev
 
         private void Button_main_name_Click(object sender, EventArgs e)
         {
-            Form_menu newForm = new Form_menu();
-            newForm.Show();
+            Router.GetInstance().NavigateTo(new Form_menu());
         }
     }
 }

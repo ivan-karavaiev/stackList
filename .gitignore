@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Idea 
 *.idea
+
+# New text files
+TextFile/
