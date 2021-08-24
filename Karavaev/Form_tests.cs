@@ -18,6 +18,7 @@ namespace Karavaev
         }
 
         int full = 6, counter = 0;
+
         private void Button_testEnd_Click(object sender, EventArgs e)
         {
             if (radioButton_Q1_3.Checked) ++counter;
@@ -26,7 +27,7 @@ namespace Karavaev
             if (radioButton_Q4_1.Checked) ++counter;
             if (radioButton_Q5_1.Checked) ++counter;
             if (radioButton_Q6_4.Checked) ++counter;
-                if (counter == full)
+            if (counter == full)
             {
                 MessageBox.Show("Все правильно! Ви молодець!");
             }
@@ -34,7 +35,8 @@ namespace Karavaev
             {
                 MessageBox.Show("Кількість неправильних відповідей: " + (full - counter).ToString());
             }
-            this.Close();
+
+            Router.GetInstance().GoBack();
         }
     }
 }

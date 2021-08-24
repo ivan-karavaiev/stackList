@@ -16,10 +16,12 @@ namespace Karavaev
         {
             InitializeComponent();
         }
+
         List<Point> clickList = new List<Point>();
         public List<Point> edge = new List<Point>();
         public List<Point> vertex = new List<Point>();
         bool access = false;
+
         public Form_practic_model(List<Point> vertex, List<Point> edge)
         {
             InitializeComponent();
@@ -27,23 +29,19 @@ namespace Karavaev
             {
                 this.vertex.Add(vertex[i]);
             }
+
             for (int i = 0; i < edge.Count(); ++i)
             {
                 this.edge.Add(edge[i]);
             }
+
             access = true;
         }
 
-        private void Button_practic_model_help_Click(object sender, EventArgs e)
-        {
-            Form_help newForm = new Form_help();
-            newForm.Show();
-        }
+        private void Button_practic_model_help_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_help());
 
-        private void Button_practic_back_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void Button_practic_back_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
 
         void BuildPictureBoxGraphView()
         {
@@ -73,6 +71,7 @@ namespace Karavaev
         StartBuild build = new StartBuild(radius);
         Bitmap bmp, bmp_stack, bmp_stack_list;
         Graphics gr, gr_stack, gr_stack_list;
+
         private void Form_practic_model_Load(object sender, EventArgs e)
         {
             //Form_practic ownerForm = this.Owner as Form_practic;
@@ -86,6 +85,7 @@ namespace Karavaev
         }
 
         int building_click = 0;
+
         private void Button_practic_model_building_Click(object sender, EventArgs e)
         {
             if (building_click == 0)
@@ -98,9 +98,12 @@ namespace Karavaev
                 Button_practic_model_modelling_Click(sender, e);
                 gr.Clear(Color.White);
                 pictureBox_model_GraphView.Image = bmp;
-                clickList.Clear(); edge.Clear(); vertex.Clear();
+                clickList.Clear();
+                edge.Clear();
+                vertex.Clear();
                 //button_practic_model_building.Text = "Розпочати побудову";
             }
+
             ++building_click;
         }
 
@@ -114,6 +117,7 @@ namespace Karavaev
                     index = i;
                 }
             }
+
             return index;
         }
 
@@ -124,7 +128,8 @@ namespace Karavaev
         {
             if (modelling_click) return;
             Point mp = new Point();
-            mp.X = e.X; mp.Y = e.Y;
+            mp.X = e.X;
+            mp.Y = e.Y;
             if (mp.X - radius < 0 || mp.X + radius > 500) return;
             if (mp.Y - radius < 0 || mp.Y + radius > 400) return;
             bool Intersection = false;
@@ -132,17 +137,20 @@ namespace Karavaev
             {
                 Intersection |= build.squareIntersection(vertex[i], mp);
             }
+
             if (Intersection) clickList.Add(mp);
             else
             {
                 vertex.Add(mp);
                 gr = build.DrawRound(gr, penBlack, mp, vertex.Count() - 1);
             }
+
             if (clickList.Count() == 1)
             {
                 int index = findIndexInVertex(clickList[0]);
                 gr = build.DrawRound(gr, penGreen, vertex[index], index);
             }
+
             if (clickList.Count() == 2)
             {
                 if (build.squareIntersection(clickList[0], clickList[1]))
@@ -170,6 +178,7 @@ namespace Karavaev
                     }
                 }
             }
+
             pictureBox_model_GraphView.Image = bmp;
         }
 
@@ -185,22 +194,22 @@ namespace Karavaev
         void ViewGraph()
         {
             gr.Clear(Color.White);
-            for(int i = 0; i < vertex.Count(); ++i)
+            for (int i = 0; i < vertex.Count(); ++i)
             {
                 gr = build.DrawRound(gr, penBlack, vertex[i], i);
             }
-            for(int i = 0; i < edge.Count(); ++i)
+
+            for (int i = 0; i < edge.Count(); ++i)
             {
                 gr = build.DrawEdge(gr, penBlack, vertex[edge[i].X], vertex[edge[i].Y]);
             }
+
             pictureBox_model_GraphView.Image = bmp;
         }
 
-        private void Button_practic_rebuilding_Click(object sender, EventArgs e)
-        {
-            Form_practic_rebuilding newForm = new Form_practic_rebuilding(vertex, edge, cyclic_edge[maxTime - 1], list_of_stack[maxTime - 1]);
-            newForm.Show();
-        }
+        private void Button_practic_rebuilding_Click(object sender, EventArgs e) =>
+            Router.GetInstance()
+                .NavigateTo(new Form_practic_rebuilding(vertex, edge, cyclic_edge[maxTime - 1], list_of_stack[maxTime - 1]));
 
         private void Button_practic_model_icon_upup_Click(object sender, EventArgs e)
         {
@@ -216,11 +225,8 @@ namespace Karavaev
             viewButtonCursor();
         }
 
-        private void Button_practic_model_text_Click(object sender, EventArgs e)
-        {
-            Form_save_to_text newForm = new Form_save_to_text(vertex, edge, list_of_stack[maxTime - 1]);
-            newForm.Show();
-        }
+        private void Button_practic_model_text_Click(object sender, EventArgs e) =>
+            Router.GetInstance().NavigateTo(new Form_save_to_text(vertex, edge, list_of_stack[maxTime - 1]));
 
         private void Button_practic_model_modelling_Click(object sender, EventArgs e)
         {
@@ -256,16 +262,17 @@ namespace Karavaev
 
             Stack_list model = new Stack_list(vertex, edge);
             model.buildStackList(0);
-            
+
             DFS_knot = model.DFS_knot_in_time;
             DFS_stack = model.DFS_stack_in_time;
             list_of_stack = model.list_of_stack_in_time;
             cyclic_edge = model.cyclic_edge_in_time;
             maxTime = DFS_stack.Count();
         }
+
         void viewButtonCursor()
         {
-            if(time == maxTime - 2)
+            if (time == maxTime - 2)
             {
                 button_practic_model_icon_upup.Cursor = System.Windows.Forms.Cursors.No;
             }
@@ -273,6 +280,7 @@ namespace Karavaev
             {
                 button_practic_model_icon_upup.Cursor = System.Windows.Forms.Cursors.Hand;
             }
+
             if (time == maxTime - 1)
             {
                 button_practic_model_icon_up.Cursor = System.Windows.Forms.Cursors.No;
@@ -281,6 +289,7 @@ namespace Karavaev
             {
                 button_practic_model_icon_up.Cursor = System.Windows.Forms.Cursors.Hand;
             }
+
             if (time == 0)
             {
                 button_practic_model_icon_down.Cursor = System.Windows.Forms.Cursors.No;
@@ -292,9 +301,11 @@ namespace Karavaev
                 button_practic_model_icon_down.Cursor = System.Windows.Forms.Cursors.Hand;
             }
         }
+
         void viewGraphInTime(bool viewCyclicEdge)
         {
-            ViewData view = new ViewData(vertex, edge, DFS_knot[time], DFS_stack[time], list_of_stack[time], cyclic_edge[time], viewCyclicEdge);
+            ViewData view = new ViewData(vertex, edge, DFS_knot[time], DFS_stack[time], list_of_stack[time], cyclic_edge[time],
+                viewCyclicEdge);
             gr.Clear(Color.White);
             gr_stack.Clear(Color.White);
             gr_stack_list.Clear(Color.White);
@@ -305,16 +316,19 @@ namespace Karavaev
             pictureBox_model_StackView.Image = bmp_stack;
             pictureBox_model_StackList.Image = bmp_stack_list;
         }
+
         private void Button_practic_model_icon_up_Click(object sender, EventArgs e)
         {
             if (!modelling_click) return;
             ++time;
-            if(time == maxTime)
+            if (time == maxTime)
             {
-                --time; return;
+                --time;
+                return;
             }
+
             viewButtonCursor();
-            if(time == maxTime - 1)
+            if (time == maxTime - 1)
             {
                 viewGraphInTime(true);
             }
@@ -323,14 +337,17 @@ namespace Karavaev
                 viewGraphInTime(false);
             }
         }
+
         private void Button_practic_model_icon_down_Click(object sender, EventArgs e)
         {
             if (!modelling_click) return;
             --time;
             if (time == -1)
             {
-                ++time; return;
+                ++time;
+                return;
             }
+
             viewButtonCursor();
             viewGraphInTime(false);
         }

@@ -12,9 +12,8 @@ namespace Karavaev
 {
     class Stack_tree : StartBuild
     {
-
         public List<List<int>> stackList = new List<List<int>>();
-  
+
         public Stack_tree(List<List<int>> stackList)
         {
             this.stackList = stackList;
@@ -25,6 +24,7 @@ namespace Karavaev
         public List<int>[] graph = new List<int>[maxN];
 
         int yPosition = 0;
+
         void dfs(int vertex, int ancestor = -1)
         {
             usedVertex[vertex] = true;
@@ -37,6 +37,7 @@ namespace Karavaev
                     coordinates[way[i]] = new Point(coordinates[way[i - 1]].X + 1, coordinates[way[i - 1]].Y);
                 }
             }
+
             List<int> adjacent = new List<int>();
             for (int i = 0; i < graph[vertex].Count(); ++i)
             {
@@ -45,7 +46,8 @@ namespace Karavaev
             }
 
             List<int> wayWertex = stackList[vertex];
-            int st = 1; if (ancestor == -1) st = 0;
+            int st = 1;
+            if (ancestor == -1) st = 0;
 
             for (int i = st; i < wayWertex.Count(); ++i)
             {
@@ -55,6 +57,7 @@ namespace Karavaev
                     if (stackList[adjacent[j]][0] != wayWertex[i]) continue;
                     toAdjacent.Add(adjacent[j]);
                 }
+
                 if (toAdjacent.Count() > 0) ++yPosition;
                 int x = coordinates[wayWertex[i]].X;
                 for (int j = toAdjacent.Count() - 1; j >= 0; --j)
@@ -66,6 +69,7 @@ namespace Karavaev
                         --x;
                     }
                 }
+
                 for (int j = 0; j < toAdjacent.Count(); ++j)
                 {
                     dfs(toAdjacent[j], vertex);
@@ -85,6 +89,7 @@ namespace Karavaev
                     return i;
                 }
             }
+
             return -1;
         }
 
@@ -102,14 +107,16 @@ namespace Karavaev
                 {
                     coordinates[way[i]] = new Point(coordinates[way[i - 1]].X + 1, coordinates[way[i - 1]].Y);
                 }
-                for(int i = 0; i <= nowYposition; ++i)
+
+                for (int i = 0; i <= nowYposition; ++i)
                 {
-                    if(coordinates[way[way.Count() - 1]].X > lastXposition[nowYposition])
+                    if (coordinates[way[way.Count() - 1]].X > lastXposition[nowYposition])
                     {
                         lastXposition[nowYposition] = coordinates[way[way.Count() - 1]].X;
                     }
                 }
             }
+
             List<int> adjacent = new List<int>();
             for (int i = 0; i < graph[vertex].Count(); ++i)
             {
@@ -118,7 +125,8 @@ namespace Karavaev
             }
 
             List<int> wayWertex = stackList[vertex];
-            int st = 1; if (ancestor == -1) st = 0;
+            int st = 1;
+            if (ancestor == -1) st = 0;
 
             for (int i = st; i < wayWertex.Count(); ++i)
             {
@@ -130,6 +138,7 @@ namespace Karavaev
                     size += stackList[adjacent[j]].Count() - 1;
                     toAdjacent.Add(adjacent[j]);
                 }
+
                 if (toAdjacent.Count() == 0) continue;
                 nowYposition = findYposition(coordinates[wayWertex[i]].X - size + 1);
                 for (int j = 0; j <= nowYposition; ++j)
@@ -139,6 +148,7 @@ namespace Karavaev
                         lastXposition[j] = coordinates[wayWertex[i]].X;
                     }
                 }
+
                 int x = coordinates[wayWertex[i]].X;
                 for (int j = toAdjacent.Count() - 1; j >= 0; --j)
                 {
@@ -149,6 +159,7 @@ namespace Karavaev
                         --x;
                     }
                 }
+
                 for (int j = 0; j < toAdjacent.Count(); ++j)
                 {
                     dfsCompressed(toAdjacent[j], vertex);
@@ -171,7 +182,9 @@ namespace Karavaev
                 {
                     list_of_stack[list_of_stack.Count() - 1].Add(stackList[i][j]);
                 }
-            } stackList = list_of_stack;
+            }
+
+            stackList = list_of_stack;
 
             listCount = stackList.Count();
 
@@ -181,17 +194,19 @@ namespace Karavaev
                 graph[i] = new List<int>();
                 int m = stackList[i].Count();
                 vertexCount += m;
-                if(setVertex.Contains(stackList[i][0]) == false)
+                if (setVertex.Contains(stackList[i][0]) == false)
                 {
                     startVertices.Add(i);
                 }
-                for(int j = 0; j < m; ++j)
+
+                for (int j = 0; j < m; ++j)
                 {
                     if (!setVertex.Contains(stackList[i][j]))
                     {
                         setVertex.Add(stackList[i][j]);
                     }
                 }
+
                 for (int j = i + 1; j < listCount; ++j)
                 {
                     if (stackList[i].Contains(stackList[j][0]) && (startVertices.Contains(i) || stackList[i][0] != stackList[j][0]))
@@ -201,24 +216,28 @@ namespace Karavaev
                     }
                 }
             }
+
             vertexCount -= (listCount - startVertices.Count());
 
-            if(status == 1)
+            if (status == 1)
             {
                 for (int i = 0; i < listCount; ++i)
                 {
                     if (usedVertex[i] == false)
                     {
-                        dfs(i); ++yPosition;
+                        dfs(i);
+                        ++yPosition;
                     }
                 }
             }
-            if(status == 2)
+
+            if (status == 2)
             {
                 for (int i = 0; i < maxN; ++i)
                 {
                     lastXposition[i] = -1000;
                 }
+
                 for (int i = 0; i < listCount; ++i)
                 {
                     if (usedVertex[i] == false)

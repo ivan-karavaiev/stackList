@@ -29,11 +29,12 @@ namespace Karavaev
             for (int i = 0; i < stackList.Count(); ++i)
             {
                 this.stackList.Add(new List<int>());
-                for(int j = 0; j < stackList[i].Count(); ++j)
+                for (int j = 0; j < stackList[i].Count(); ++j)
                 {
                     this.stackList[i].Add(stackList[i][j]);
                 }
             }
+
             this.cyclicEdge = cyclicEdge;
             this.vertex = vertex;
             this.edge = edge;
@@ -65,6 +66,7 @@ namespace Karavaev
         }
 
         bool viewCycle = false;
+
         private void Button_practic_rebuilding_cycle_Click(object sender, EventArgs e)
         {
             viewCycle = !viewCycle;
@@ -80,36 +82,33 @@ namespace Karavaev
             }
         }
 
-        private void Button_practic_rebuilding_back_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void Button_practic_rebuilding_back_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
 
-       /*private void Button_saveTree_Click(object sender, EventArgs e)
-        {
-            if (pictureBox_practic_rebuilding.Image != null)
-            {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Title = "Coxранить картинку как";
-                sfd.OverwritePrompt = true;
-                sfd.CheckPathExists = true;
-                sfd.Filter = "Image Files(*.JPG)|*.JPG|Image Files(*.PNG)|*.PNG";
-                sfd.ShowHelp = true;
-
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        pictureBox_practic_rebuilding.Image.Save(sfd.FileName);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Неможливо зберегти зображення", "Помилка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }*/
+        /*private void Button_saveTree_Click(object sender, EventArgs e)
+         {
+             if (pictureBox_practic_rebuilding.Image != null)
+             {
+                 SaveFileDialog sfd = new SaveFileDialog();
+                 sfd.Title = "Coxранить картинку как";
+                 sfd.OverwritePrompt = true;
+                 sfd.CheckPathExists = true;
+                 sfd.Filter = "Image Files(*.JPG)|*.JPG|Image Files(*.PNG)|*.PNG";
+                 sfd.ShowHelp = true;
+ 
+                 if (sfd.ShowDialog() == DialogResult.OK)
+                 {
+                     try
+                     {
+                         pictureBox_practic_rebuilding.Image.Save(sfd.FileName);
+                     }
+                     catch
+                     {
+                         MessageBox.Show("Неможливо зберегти зображення", "Помилка",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     }
+                 }
+             }
+         }*/
 
         void BuildPictureBoxRebuilding()
         {
@@ -126,17 +125,20 @@ namespace Karavaev
             {
                 gr = build.DrawRound(gr, penBlack, vertex[i], i);
             }
+
             for (int i = 0; i < edge.Count(); ++i)
             {
                 if (!viewCycle)
                 {
-                    if(cyclicEdge.Contains(edge[i]) || cyclicEdge.Contains(new Point(edge[i].Y, edge[i].X)))
+                    if (cyclicEdge.Contains(edge[i]) || cyclicEdge.Contains(new Point(edge[i].Y, edge[i].X)))
                     {
                         continue;
                     }
                 }
+
                 gr = build.DrawEdge(gr, penBlack, vertex[edge[i].X], vertex[edge[i].Y]);
             }
+
             pictureBox_rebuilding_GraphView.Image = bmp;
         }
     }

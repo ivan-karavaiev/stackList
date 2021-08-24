@@ -23,9 +23,10 @@ namespace Karavaev
         public List<List<int>> list_of_stack = new List<List<int>>();
         private void Button_textDownload_Click(object sender, EventArgs e)
         {
-            Form_text_download newForm = new Form_text_download(20, 1);
-            newForm.Show();
+            var newForm = new Form_text_download(20, 1);
             newForm.Owner = this;
+            
+            Router.GetInstance().NavigateTo(newForm);
         }
 
         Bitmap bmp;
@@ -197,9 +198,6 @@ namespace Karavaev
             }
         }
 
-        private void Button_build_back_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void Button_build_back_Click(object sender, EventArgs e) => Router.GetInstance().GoBack();
     }
 }

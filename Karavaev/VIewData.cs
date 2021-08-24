@@ -12,7 +12,10 @@ namespace Karavaev
 {
     class ViewData : StartBuild
     {
-        public ViewData() { }
+        public ViewData()
+        {
+        }
+
         public List<Point> vertex = new List<Point>();
         List<Point> edge = new List<Point>();
         List<int> DFS_knot = new List<int>();
@@ -21,7 +24,9 @@ namespace Karavaev
         List<Point> cyclic_edge = new List<Point>();
         bool viewCyclicEdge = new bool();
         int nowVertex = -1;
-        public ViewData(List<Point> vertex, List<Point> edge, List<int> DFS_knot, List<int> DFS_stack, List<List<int>> list_of_stack, List<Point> cyclic_edge, bool viewCyclicEdge)
+
+        public ViewData(List<Point> vertex, List<Point> edge, List<int> DFS_knot, List<int> DFS_stack, List<List<int>> list_of_stack,
+            List<Point> cyclic_edge, bool viewCyclicEdge)
         {
             this.vertex = vertex;
             this.edge = edge;
@@ -30,11 +35,12 @@ namespace Karavaev
             this.list_of_stack = list_of_stack;
             this.cyclic_edge = cyclic_edge;
             this.viewCyclicEdge = viewCyclicEdge;
-            if(DFS_stack.Count() > 0)
+            if (DFS_stack.Count() > 0)
             {
                 nowVertex = DFS_stack[DFS_stack.Count() - 1];
             }
         }
+
         public ViewData(List<Point> vertex, List<Point> edge, List<List<int>> list_of_stack, List<Point> cyclic_edge)
         {
             this.vertex = vertex;
@@ -51,6 +57,7 @@ namespace Karavaev
         }
 
         List<List<int>> stackList = new List<List<int>>();
+
         public ViewData(List<List<int>> stackList)
         {
             this.stackList = stackList;
@@ -60,21 +67,25 @@ namespace Karavaev
         Pen penBlue = new Pen(Color.Blue);
         Pen penRed = new Pen(Color.Red);
         Pen penGreen = new Pen(Color.Green);
+
         public Graphics viewGraph(Graphics gr)
         {
             for (int i = 0; i < vertex.Count(); ++i)
             {
                 gr = DrawRound(gr, penBlack, vertex[i], i);
             }
+
             if (DFS_knot.Count() == 0 && DFS_stack.Count() > 0)
             {
                 int index = DFS_stack[DFS_stack.Count() - 1];
                 gr = DrawRound(gr, penBlue, vertex[index], index);
             }
+
             if (DFS_knot.Count() == 1)
             {
                 gr = DrawRound(gr, penRed, vertex[DFS_knot[0]], DFS_knot[0]);
             }
+
             if (DFS_knot.Count() > 1)
             {
                 gr = DrawRound(gr, penRed, vertex[DFS_knot[0]], DFS_knot[0]);
@@ -82,9 +93,11 @@ namespace Karavaev
                 {
                     gr = DrawRound(gr, penGreen, vertex[DFS_knot[i]], DFS_knot[i]);
                 }
+
                 int index = DFS_stack[DFS_stack.Count() - 1];
                 gr = DrawRound(gr, penBlue, vertex[index], index);
             }
+
             if (viewCyclicEdge)
             {
                 for (int i = 0; i < cyclic_edge.Count(); ++i)
@@ -92,14 +105,17 @@ namespace Karavaev
                     gr = DrawEdge(gr, penRed, vertex[cyclic_edge[i].X], vertex[cyclic_edge[i].Y]);
                 }
             }
+
             for (int i = 0; i < edge.Count(); ++i)
             {
                 Point rEdge = new Point(edge[i].Y, edge[i].X);
                 if (cyclic_edge.Contains(edge[i]) || cyclic_edge.Contains(rEdge)) continue;
                 gr = DrawEdge(gr, penBlack, vertex[edge[i].X], vertex[edge[i].Y]);
             }
+
             return gr;
         }
+
         public Graphics viewStack(Graphics gr)
         {
             radius += 5;
@@ -111,6 +127,7 @@ namespace Karavaev
                 gr = DrawRound(gr, penBlack, centerPosition, DFS_stack[i]);
                 centerPosition.Y -= 2 * radius;
             }
+
             radius -= 5;
             return gr;
         }
@@ -131,11 +148,12 @@ namespace Karavaev
                     vertex.Add(position);
                     position.X += columnDelta + 2 * radius;
                 }
+
                 position.Y += rowDelta + 2 * radius;
                 position.X = radius + delta;
             }
-
         }
+
         public Graphics viewOnlyStackList(Graphics gr)
         {
             int delta = 5;
@@ -158,8 +176,10 @@ namespace Karavaev
                     {
                         gr = DrawRound(gr, penBlack, position, list_of_stack[i][j]);
                     }
+
                     position.X += columnDelta + 2 * radius;
                 }
+
                 position.Y += rowDelta + 2 * radius;
                 position.X = radius + delta;
             }
@@ -185,6 +205,7 @@ namespace Karavaev
                     vertex.Add(position);
                     position.X += columnDelta + 2 * radius;
                 }
+
                 position.Y += rowDelta + 2 * radius;
                 position.X = radius + delta;
             }
@@ -200,6 +221,7 @@ namespace Karavaev
             {
                 gEdge[i] = new List<int>();
             }
+
             for (int i = 0; i < cyclic_edge.Count(); ++i)
             {
                 gEdge[cyclic_edge[i].X].Add(cyclic_edge[i].Y);
@@ -218,6 +240,7 @@ namespace Karavaev
                     vertex.Add(position);
                     position.X += columnDelta + 2 * radius;
                 }
+
                 position.Y += 2 * radius + rowDelta;
             }
         }
@@ -244,8 +267,10 @@ namespace Karavaev
                     {
                         gr = DrawRound(gr, penBlack, position, list_of_stack[i][j]);
                     }
+
                     position.X += columnDelta + 2 * radius;
                 }
+
                 position.Y += rowDelta + 2 * radius;
                 position.X = radius + delta;
             }
@@ -260,21 +285,22 @@ namespace Karavaev
             position.Y += radius * 2 + 10;
 
             List<int>[] gEdge = new List<int>[maxN];
-            for(int i = 0; i < maxN; ++i)
+            for (int i = 0; i < maxN; ++i)
             {
                 gEdge[i] = new List<int>();
             }
-            for(int i = 0; i < cyclic_edge.Count(); ++i)
+
+            for (int i = 0; i < cyclic_edge.Count(); ++i)
             {
                 gEdge[cyclic_edge[i].X].Add(cyclic_edge[i].Y);
                 gEdge[cyclic_edge[i].Y].Add(cyclic_edge[i].X);
             }
 
-            for(int i = 0; i < maxN; ++i)
+            for (int i = 0; i < maxN; ++i)
             {
                 if (gEdge[i].Count() == 0) continue;
                 position.X = radius + delta;
-                if(nowVertex == i)
+                if (nowVertex == i)
                 {
                     DrawRound(gr, penBlue, position, i);
                 }
@@ -282,6 +308,7 @@ namespace Karavaev
                 {
                     DrawRound(gr, penBlack, position, i);
                 }
+
                 position.X += 3 * radius;
                 gr = DrawEdge(gr, penRed, position, new Point(position.X - 3 * radius, position.Y));
                 for (int j = 0; j < gEdge[i].Count(); ++j)
@@ -295,10 +322,13 @@ namespace Karavaev
                     {
                         DrawRound(gr, penBlack, position, gEdge[i][j]);
                     }
+
                     position.X += columnDelta + 2 * radius;
                 }
+
                 position.Y += 2 * radius + rowDelta;
             }
+
             return gr;
         }
 
@@ -308,19 +338,22 @@ namespace Karavaev
 
         public Graphics viewRebuild(Graphics gr)
         {
-            for(int i = 0; i < vertex.Count(); ++i)
+            for (int i = 0; i < vertex.Count(); ++i)
             {
                 gr = DrawRound(gr, penBlack, vertex[i], i);
             }
+
             for (int i = 0; i < stackList.Count(); ++i)
             {
                 int m = stackList[i].Count();
-                int st = 2; if (startVertices.Contains(i)) st = 1;
+                int st = 2;
+                if (startVertices.Contains(i)) st = 1;
                 for (int j = st; j < m; ++j)
                 {
                     gr = DrawEdge(gr, penBlack, coordinates[stackList[i][j - 1]], coordinates[stackList[i][j]]);
                 }
             }
+
             for (int i = 0; i < edge.Count(); ++i)
             {
                 Point pos1 = coordinates[edge[i].X];
@@ -330,13 +363,17 @@ namespace Karavaev
                     pos1 = coordinates[edge[i].Y];
                     pos2 = coordinates[edge[i].X];
                 }
-                pos1.Y += radius; pos2.Y -= radius;
+
+                pos1.Y += radius;
+                pos2.Y -= radius;
                 gr.DrawLine(penBlack, pos1, new Point(pos1.X, pos2.Y - radius));
                 gr.DrawLine(penBlack, pos2, new Point(pos2.X, pos2.Y - radius));
                 gr.DrawLine(penBlack, new Point(pos2.X, pos2.Y - radius), new Point(pos1.X, pos2.Y - radius));
             }
+
             return gr;
         }
+
         public void viewRebuildFindCoordinates(int status)
         {
             Stack_tree stackTree = new Stack_tree(stackList);
@@ -349,12 +386,13 @@ namespace Karavaev
             startVertices = stackTree.startVertices;
 
             int mn = 0;
-            for(int i = 0; i < nVertex; ++i)
+            for (int i = 0; i < nVertex; ++i)
             {
                 mn = Math.Min(mn, coordinates[i].X);
             }
+
             int deltaX = 5, deltaY = 5;
-            for(int i = 0; i < nVertex; ++i)
+            for (int i = 0; i < nVertex; ++i)
             {
                 coordinates[i].X += -mn;
                 coordinates[i].X = deltaX + radius + 4 * radius * coordinates[i].X;
